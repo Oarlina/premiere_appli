@@ -39,18 +39,3 @@
 
 
 
-<?php
-
-session_start();
-
-if (isset($_POST['envoyer']))
-{
-
-}
-// header("Location:index.php");
-
-
-
-
-
-?>
