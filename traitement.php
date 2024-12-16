@@ -23,7 +23,7 @@ if (isset($_POST['envoyer'])) // si le formulaire a été envoyer
     }
 
 }
-// header("Location:index.php"); // c'est une redirection a la page index
+header("Location:index.php"); // c'est une redirection a la page index
 
 
 ?>

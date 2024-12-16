@@ -8,8 +8,36 @@ body{
     height: 100%;
     background-image: url(legume.avif);
     background-size: cover;
+    width: 100%;
     /* background-repeat: no-repeat; */
     display: flex;
     flex-direction: column; /* pour que les éléments soit en colonne*/
     text-align: center; /* pour que les éléments soit centrer horizontalement */
+}
+nav>a{
+    text-decoration: none;
+    
+    width: 100%;
+    color:black;   
+}
+nav{
+    margin: 0 0 20px 0; /* met des marges nul part sauf 20pixels en bas*/
+    width: 100%;
+    background-color: rgb(200, 250, 172);
+}
+
+.text{
+    /* backdrop-filter: blur(30px);  rend flou le fond de 30pixels */
+    /* border: 1px solid black; */
+    background: radial-gradient(circle,green, rgb(122, 228, 101), white ) ;
+    display: flex;
+    flex-direction: column;
+    text-align:center;
+    margin: 0 auto;
+    padding: 10px;
+
+}
+.button{
+    border-radius: 2px;
+    margin: 15px 0 2px 0; /* met comme marge 15pixels en haut rien a droite 2pixels en bas et rien a gauche*/
 }
