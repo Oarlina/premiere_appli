@@ -17,7 +17,20 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
 </head>
 <body>
     <nav>
-        <a href="index.php">acceuil</a>
+        <a href="index.php">acceuil</a> 
+        <a>(
+            <?php // on implemente du php pour calculer le nombre de produit dans le panier
+            $qtt = 0; 
+            if (!(!isset($_SESSION['produits']) || empty($_SESSION['produits']))) // si le panier n'est pas vide
+            {
+                foreach ( $_SESSION['produits'] as $index => $produit  ) // on parcours le tableau des produits
+                {
+                    $qtt += $produit['qtt']; // on implemente le nombre de produit
+                }
+            }
+            echo $qtt; // on retourne la quantite de tous les produits
+            ?>)
+        </a>
     </nav>
     <section class="text">
         <?php
@@ -39,6 +52,7 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
                     "</thead>",
                     "</tbody>";
             $totalGeneral = 0;
+            $nbproduit = 0;
             // on parcours la clé produits avec la clé index et la valeur  produit
             foreach ( $_SESSION['produits'] as $index => $produit  )
             {
@@ -50,6 +64,7 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
                         "<td>".number_format($produit['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
                     "</tr>"; // on concatènes des éléments html
                 $totalGeneral += $produit ['total']; // on ajoute le prix d'un produit au prixGeneral
+                $nbproduit += $produit['qtt']; // on ajoute le nombre de produit mis dans le panier
             }
             echo "<tr>",
                     "<td colspan=4> Total général : </td>",
@@ -59,6 +74,7 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
         }
         ?>
     </section>
+
 </body>
 </html>
 

@@ -9,6 +9,19 @@
 <body>
     <nav>
         <a href="recap.php">recap</a>
+        <a>(
+            <?php // on implemente du php pour calculer le nombre de produit dans le panier
+            $qtt = 0; 
+            if (!(!isset($_SESSION['produits']) || empty($_SESSION['produits']))) // si le panier n'est pas vide
+            {
+                foreach ( $_SESSION['produits'] as $index => $produit  ) // on parcours le tableau des produits
+                {
+                    $qtt += $produit['qtt']; // on implemente le nombre de produit
+                }
+            }
+            echo $qtt; // on retourne la quantite de tous les produits
+            ?>)
+        </a>
     </nav>
     <section class="text">
         <h1>Ajouter un produit</h1>
@@ -22,20 +35,32 @@
             <p>
                 <label>
                     Prix du produit : 
-                    <input type="text" name="prix" step="any"> 
+                    <input type="float" name="prix" step="any"> 
                 </label>
             </p>
             <p>
-                <label>
+                <label >
                     Quantité désirée : 
-                    <input type="text" name="qtt" value="1">
+                    <input type="number" id="qtt" name="qtt" value="1">
                 </label>
             </p>
             <p>
-                <input type="submit" name="envoyer" class="button" value="Ajouter le produit"> <!-- boutton pour ajouter le produit -->
+                <button><input type="submit" name="envoyer" class="button" value="Ajouter le produit"></button> <!-- boutton pour ajouter le produit -->
             </p>
         </form>
     </section>
+    <!-- <script>
+        var total=0 ;
+        const button = document.querySelector("button");
+        button.addEventListener("click",(function(total)
+        {
+            const qtt = document.getElementById("qtt").value;
+            // alert(qtt);
+            total += parseInt(qtt);
+            alert(total);
+        }));
+        console.log(total);
+    </script> -->
 </body>
 </html>
 
