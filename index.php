@@ -10,16 +10,9 @@
     <nav>
         <a href="recap.php">recap</a>
         <a>(
-            <?php // on implemente du php pour calculer le nombre de produit dans le panier
-            $qtt = 0; 
-            if (!(!isset($_SESSION['produits']) || empty($_SESSION['produits']))) // si le panier n'est pas vide
-            {
-                foreach ( $_SESSION['produits'] as $index => $produit  ) // on parcours le tableau des produits
-                {
-                    $qtt += $produit['qtt']; // on implemente le nombre de produit
-                }
-            }
-            echo $qtt; // on retourne la quantite de tous les produits
+            <?php 
+            $qtt = $_GET['qtt'];
+            echo $qtt;
             ?>)
         </a>
     </nav>
