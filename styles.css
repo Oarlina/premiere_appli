@@ -37,7 +37,13 @@ nav{
     padding: 10px;
 
 }
-.button{
-    border-radius: 2px;
-    margin: 15px 0 2px 0; /* met comme marge 15pixels en haut rien a droite 2pixels en bas et rien a gauche*/
+.messageTrue, .messageFalse{
+    width: fit-content;
+    margin : 2px auto 0 auto ;
+}
+.messageTrue{
+    background-color: green;
+}
+.messageFalse{
+    background-color: tomato;
 }

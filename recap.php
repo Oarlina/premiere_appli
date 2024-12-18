@@ -28,7 +28,7 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
                 }
             }
             echo $qtt; // on retourne la quantite de tous les produits
-            $_SESSION['qtts'] = $qtt;
+            $_SESSION['qtts'] = $qtt; // on cree un tableau avec la quantite des produits
             ?>)
         </a>
     </nav>

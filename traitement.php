@@ -20,6 +20,9 @@ if (isset($_POST['envoyer'])) // si le formulaire a été envoyer
         ];
 
         $_SESSION['produits'][] = $produit; // ajoute chaque produit dans le tableau SESSION et la clé produits (qui est crée si elle n'existe pas)
+        $_SESSION['message']= "Produit ajouté";
+    }else {
+        $_SESSION['message']= "Refaire le formulaire";
     }
 
 }

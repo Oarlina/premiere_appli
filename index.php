@@ -14,10 +14,12 @@ session_start();
     <nav>
         <a href="recap.php">recap (
             <?php 
-            // session_start();
-            $qtt = $_SESSION['qtts'];
-            // echo "chat";
-            echo $qtt;
+            if (!(!isset($_SESSION['qtts']) || empty($_SESSION['qtts']))) // si le panier n'est pas vide
+            {
+                echo $_SESSION['qtts']; // on affiche le nombre de produit a recap
+            } else {
+                echo "0";
+            }
             ?>)
         </a>
     </nav>
@@ -39,14 +41,40 @@ session_start();
             <p>
                 <label >
                     Quantité désirée : 
-                    <input type="number" id="qtt" name="qtt" value="1">
+                    <input type="number" name="qtt" value="1">
                 </label>
             </p>
             <p>
-                <button><input type="submit" name="envoyer" class="button" value="Ajouter le produit"></button> <!-- boutton pour ajouter le produit -->
+                <button>
+                    <input type="submit" name="envoyer" value="Ajouter le produit">
+                </button> <!-- boutton pour ajouter le produit -->
             </p>
         </form>
     </section>
+    <section class="message">
+        <?php
+        if ($_SESSION['message'] == "Produit ajouté") // si le message est "Produit ajouté"
+        {
+            ?><section class="messageTrue">  <!-- je cree une section pour pouvoir l'encadrer et changer le fond-->
+                <?php
+                echo $_SESSION['message']; // j'affiche le message
+                ?> 
+            </section>
+            <?php
+        }else { // sinon
+            ?><section class="messageFalse"> <!-- je cree une section pour pouvoir l'encadrer et changer le fond-->
+                <?php
+                echo $_SESSION['message']; // j'affiche le message
+                ?> 
+            </section>
+            <?php
+        }
+        $_SESSION['message'] = null; // on vide la superglobales message
+        
+        ?>
+    </section>
+            
+
 </body>
 </html>
 
