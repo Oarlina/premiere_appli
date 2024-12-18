@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-body, .text{
+body, .text, .alerte{
     display: flex;
     flex-direction: column; /* pour que les éléments soit en colonne*/
     text-align: center; /* pour que les éléments soit centrer horizontalement */
@@ -15,7 +15,7 @@ body{
     background-repeat: no-repeat;
     width: 100%;
 }
-body, .tete, .message, button, button>a{
+body, .tete, .message, button, button>a, .alerte{
     font-size: larger;
     color: white;
 }
@@ -59,4 +59,9 @@ button{
 }
 .thd{
     padding : 3px;
+}
+.alerte{
+    width: 25%;
+    margin: 4px auto 0 auto;
+    backdrop-filter: blur(30px); /* pour rendre flou mon fond*/
 }
