@@ -43,7 +43,16 @@ nav{
 }
 .messageTrue{
     background-color: green;
+    color:white;
 }
 .messageFalse{
     background-color: tomato;
+}
+.table{
+    /* border: 1px solid black;  */
+    
+    border-collapse: collapse;
+}
+.thd{
+    padding : 3px;
 }

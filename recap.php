@@ -40,14 +40,14 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
         } else 
         {
             // debut du tableau des produits
-            echo "<table border 1 >",
+            echo "<table class='table' border 1>",
                     "<thead>",
                         "<tr>",
-                            "<th> # </th>",
-                            "<th> Nom </th>",
-                            "<th> Prix </th>",
-                            "<th> Quantité </th>",
-                            "<th> Total </th>",
+                            "<th class='thd'> # </th>",
+                            "<th class='thd'> Nom </th>",
+                            "<th class='thd'> Prix </th>",
+                            "<th class='thd'> Quantité </th>",
+                            "<th class='thd' colspan=3> Total </th>",
                         "</tr>",
                     "</thead>",
                     "</tbody>";
@@ -56,20 +56,27 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
             // on parcours la clé produits avec la clé index et la valeur  produit
             foreach ( $_SESSION['produits'] as $index => $produit  )
             {
+                $nom = $produit['nom']; // on cree la variable nom 
                 echo "<tr>",
-                        "<td>".$index."</td>",
-                        "<td>".$produit['nom']."</td>",
-                        "<td>".number_format($produit['prix'], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td>".$produit['qtt']."</td>",
-                        "<td>".number_format($produit['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
+                        "<td class='thd'>".$index."</td>",
+                        "<td class='thd' >".$nom."</td>", // on reutilise la variable nom pour la mettre dans le tableau
+                        "<td class='thd'>".number_format($produit['prix'], 2, ",", "&nbsp;")."&nbsp;€</td>",
+                        "<td class='thd'>".$produit['qtt']."</td>",
+                        "<td class='thd'><button> - </button></td>",
+                        "<td class='thd'>".number_format($produit['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
+                        "<td class='thd'><button> + </button></td>",
+                        "<td class='thd'><button><a href='traitement.php?action=delete&id=$index&name=$nom'>vider</a></button></td>", // on recupere l'indentation du tableau et on met une action delete on recupere aussi le nom du produit pour pouvoir l'afficher dans l'acceuil
                     "</tr>"; // on concatènes des éléments html
                 $totalGeneral += $produit ['total']; // on ajoute le prix d'un produit au prixGeneral
                 $nbproduit += $produit['qtt']; // on ajoute le nombre de produit mis dans le panier
             }
             echo "<tr>",
-                    "<td colspan=4> Total général : </td>",
-                    "<td><strong>".number_format($totalGeneral, 2, ",", "&nbsp;"). "&nbsp;€</strong></td>",
-                "</tr>",
+                    "<td class='thd' colspan=7> Total général : </td>",
+                    "<td class='thd'><strong>".number_format($totalGeneral, 2, ",", "&nbsp;"). "&nbsp;€</strong></td>",
+                    "</tr>",
+                    "<tr>",
+                    "<td class='thd' colspan=8><a href='traitement.php?action=clear'>vider</a></td>",
+                    "</tr>",
                 "</tbody>";
         }
         ?>

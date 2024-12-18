@@ -1,5 +1,6 @@
 <?php
 session_start();
+var_dump($_SESSION['produits']);
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +26,7 @@ session_start();
     </nav>
     <section class="text">
         <h1>Ajouter un produit</h1>
-        <form action="traitement.php" method="post"> <!-- creer un formulaire qui sera dans traitement et qui transmet les information via un formulaire -->
+        <form action="traitement.php?action=add" method="post"> <!-- creer un formulaire qui sera dans traitement et qui transmet les information via un formulaire -->
             <p>
                 <label> <!-- premiere legende du formulaire-->
                     Nom du produit :
@@ -53,24 +54,13 @@ session_start();
     </section>
     <section class="message">
         <?php
-        if ($_SESSION['message'] == "Produit ajouté") // si le message est "Produit ajouté"
-        {
-            ?><section class="messageTrue">  <!-- je cree une section pour pouvoir l'encadrer et changer le fond-->
-                <?php
-                echo $_SESSION['message']; // j'affiche le message
-                ?> 
-            </section>
-            <?php
-        }else { // sinon
-            ?><section class="messageFalse"> <!-- je cree une section pour pouvoir l'encadrer et changer le fond-->
-                <?php
-                echo $_SESSION['message']; // j'affiche le message
-                ?> 
-            </section>
-            <?php
+    
+
+        if (isset($_SESSION["message"])) { // si la superglobale message n'est pas vide
+            echo $_SESSION["message"];
+            unset($_SESSION["message"]); // vide la superglobale message
         }
-        $_SESSION['message'] = null; // on vide la superglobales message
-        
+    
         ?>
     </section>
             
