@@ -57,14 +57,15 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
             foreach ( $_SESSION['produits'] as $index => $produit  )
             {
                 $nom = $produit['nom']; // on cree la variable nom 
+                $qtt = $produit['qtt']; // on cree la variable qtt
                 echo "<tr>",
                         "<td class='thd'>".$index."</td>",
                         "<td class='thd' >".$nom."</td>", // on reutilise la variable nom pour la mettre dans le tableau
                         "<td class='thd'>".number_format($produit['prix'], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td class='thd'>".$produit['qtt']."</td>",
-                        "<td class='thd'><button> - </button></td>",
+                        "<td class='thd'>".$qtt."</td>",
+                        "<td class='thd'><button><a href='traitement.php?action=down-qtt&id=$qtt&name=$nom'> - </a></button></td>",
                         "<td class='thd'>".number_format($produit['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td class='thd'><button> + </button></td>",
+                        "<td class='thd'><button><a href='traitement.php?action=up-qtt&id=$qtt&name=$nom'&class=''> + </a></button></td>",
                         "<td class='thd'><button><a href='traitement.php?action=delete&id=$index&name=$nom'>vider</a></button></td>", // on recupere l'indentation du tableau et on met une action delete on recupere aussi le nom du produit pour pouvoir l'afficher dans l'acceuil
                     "</tr>"; // on concatènes des éléments html
                 $totalGeneral += $produit ['total']; // on ajoute le prix d'un produit au prixGeneral

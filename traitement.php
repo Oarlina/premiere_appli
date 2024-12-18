@@ -44,10 +44,12 @@ if (isset($_GET['action']))
 
             break;
         case "up-qtt":
-            //
+            $index = $_GET['id']; // on crée  la valeur de l'indentation du produit pour enlever la quantite
+            $qtt = $_GET['name'];
             break;
         case "down-qtt":
-            //
+            $index = $_GET['id']; // on crée  la valeur de l'indentation du produit pour enlever la quantite
+            $qtt = $_GET['name'];
             break;
     }
 }
