@@ -17,8 +17,7 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
 </head>
 <body>
     <nav>
-        <a href="index.php">acceuil</a> 
-        <a href="index.php?qtt=<?php echo $qtt ?>>(
+        <a href="index.php">acceuil (
             <?php // on implemente du php pour calculer le nombre de produit dans le panier
             $qtt = 0; 
             if (!(!isset($_SESSION['produits']) || empty($_SESSION['produits']))) // si le panier n'est pas vide
@@ -29,7 +28,7 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
                 }
             }
             echo $qtt; // on retourne la quantite de tous les produits
-            $_COOKIE['qtts'] = $qtt;
+            $_SESSION['qtts'] = $qtt;
             ?>)
         </a>
     </nav>

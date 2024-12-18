@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +12,11 @@
 </head>
 <body>
     <nav>
-        <a href="recap.php">recap</a>
-        <a>(
+        <a href="recap.php">recap (
             <?php 
-            $qtt = $_GET['qtt'];
+            // session_start();
+            $qtt = $_SESSION['qtts'];
+            // echo "chat";
             echo $qtt;
             ?>)
         </a>
@@ -42,18 +47,6 @@
             </p>
         </form>
     </section>
-    <!-- <script>
-        var total=0 ;
-        const button = document.querySelector("button");
-        button.addEventListener("click",(function(total)
-        {
-            const qtt = document.getElementById("qtt").value;
-            // alert(qtt);
-            total += parseInt(qtt);
-            alert(total);
-        }));
-        console.log(total);
-    </script> -->
 </body>
 </html>
 
