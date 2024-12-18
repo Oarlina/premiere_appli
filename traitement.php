@@ -2,10 +2,9 @@
 
 session_start(); // information récupérer via le GET ou le POST ou via le cookie
 
-if (isset($_GET['action']))
+if (isset($_GET['action'])) // si le get action est pas vide
 {
-    switch ($_GET['action'])
-    {
+    switch ($_GET['action']) { // alors je regarde quel conditions je dois faire
         case "add":
             if (isset($_POST['envoyer'])) // si le formulaire a été envoyer 
             {
@@ -25,38 +24,45 @@ if (isset($_GET['action']))
                     ];
 
                     $_SESSION['produits'][] = $produit; // ajoute chaque produit dans le tableau SESSION et la clé produits (qui est crée si elle n'existe pas)
-                    $_SESSION['message']= "<section class='messageTrue'>Produit ajouté</section>";
-                }else {
-                    $_SESSION['message']= "<section class='messageFalse'>Refaire le formulaire</section>";
+                    $_SESSION['message']= "<section class='message True'>Produit ajouté</section>"; // je stock une chaine dans une session message
+                }else { //sinon
+                    $_SESSION['message']= "<section class='message False'>Refaire le formulaire</section>"; // je stock une chaine dans une session message
                 }
             }
+            header("Location:index.php"); // c'est une redirection a la page index
             break;
 
         case "delete":
             $index = $_GET['id']; // on crée  la valeur de l'indentation du tableau a supprimer
             $nom = $_GET['name']; // on cree la variable qui contiendra le nom du produit pour pouvoir l'afficher
-            $_SESSION['message']= "<p>$nom a ete sup</p>"; // on affiche que le produit a ete supprimer et on dit lequel
+            $_SESSION['message']= "<p>$nom a ete supprimé</p>"; // on affiche que le produit a ete supprimer et on dit lequel
             UNSET($_SESSION['produits'][$index]); // on supprime le produit du tableau 
+            header("Location:recap.php"); // c'est une redirection a la page index
             break;
         case "clear":
             UNSET($_SESSION['produits']); // on vide le tableau
-                $_SESSION['message']= "<p>Tout a ete supprimé</p>"; // on affiche que le tableau a ete vider
+            $_SESSION['message']= "<p>Tout a ete supprimé</p>"; // on affiche que le tableau a ete vider
+            header("Location:recap.php"); // c'est une redirection a la page index
+            break;
 
-            break;
         case "up-qtt":
-            $index = $_GET['id']; // on crée  la valeur de l'indentation du produit pour enlever la quantite
-            $qtt = $_GET['name'];
+            $_SESSION['produits'][$_GET['id']]['qtt']++; // dans les produits je prend l'id du bouton cliquer et je rajoute 1 a qtt
+            $_SESSION['produits'][$_GET['id']]['total'] += $_SESSION['produits'][$_GET['id']]['prix']; // j'augmente le prix du total
+            header("Location:recap.php"); // je redirige vers la page recap
             break;
+           
         case "down-qtt":
-            $index = $_GET['id']; // on crée  la valeur de l'indentation du produit pour enlever la quantite
-            $qtt = $_GET['name'];
+            if ($_SESSION['produits'][$_GET['id']]['qtt']>1) // si le produit a plus de 1 quantité
+            {
+                $_SESSION['produits'][$_GET['id']]['qtt']--; // elle retire 1 de quantité
+                $_SESSION['produits'][$_GET['id']]['total'] -= $_SESSION['produits'][$_GET['id']]['prix']; // je retire le prix du produit au total ce qui remet a jour le total general
+                header("Location:recap.php"); // je redirige vers la page recap
+            } else //sinon
+            {
+                UNSET($_SESSION['produits'][$_GET['id']]); // je supprime le produit
+            }
+            header("Location:recap.php"); // je redirige vers la page recap
             break;
     }
 }
-
-
-
-header("Location:index.php"); // c'est une redirection a la page index
-
-
 ?>

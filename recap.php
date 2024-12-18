@@ -3,9 +3,6 @@
 // doit être mis en premier pour recuperer les informations du formulaire
 session_start(); // information récupérer via le GET ou le POST ou via le cookie
 
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,17 +14,19 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
 </head>
 <body>
     <nav>
-        <a href="index.php">acceuil (
+        <a href="index.php" class="tete">acceuil (
             <?php // on implemente du php pour calculer le nombre de produit dans le panier
             $qtt = 0; 
             if (!(!isset($_SESSION['produits']) || empty($_SESSION['produits']))) // si le panier n'est pas vide
             {
-                foreach ( $_SESSION['produits'] as $index => $produit  ) // on parcours le tableau des produits
+                foreach ( $_SESSION['produits'] as $produit) // on parcours le tableau des produits
                 {
                     $qtt += $produit['qtt']; // on implemente le nombre de produit
                 }
             }
             echo $qtt; // on retourne la quantite de tous les produits
+
+         
             $_SESSION['qtts'] = $qtt; // on cree un tableau avec la quantite des produits
             ?>)
         </a>
@@ -46,8 +45,8 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
                             "<th class='thd'> # </th>",
                             "<th class='thd'> Nom </th>",
                             "<th class='thd'> Prix </th>",
-                            "<th class='thd'> Quantité </th>",
-                            "<th class='thd' colspan=3> Total </th>",
+                            "<th class='thd' colspan=3> Quantité </th>",
+                            "<th class='thd'> Total </th>",
                         "</tr>",
                     "</thead>",
                     "</tbody>";
@@ -56,17 +55,17 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
             // on parcours la clé produits avec la clé index et la valeur  produit
             foreach ( $_SESSION['produits'] as $index => $produit  )
             {
-                $nom = $produit['nom']; // on cree la variable nom 
-                $qtt = $produit['qtt']; // on cree la variable qtt
+                // $nom = $produit['nom']; // on cree la variable nom 
+                // $qtt = $produit['qtt']; // on cree la variable qtt
                 echo "<tr>",
                         "<td class='thd'>".$index."</td>",
-                        "<td class='thd' >".$nom."</td>", // on reutilise la variable nom pour la mettre dans le tableau
+                        "<td class='thd' >".$produit['nom']."</td>", // on reutilise la variable nom pour la mettre dans le tableau
                         "<td class='thd'>".number_format($produit['prix'], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td class='thd'>".$qtt."</td>",
-                        "<td class='thd'><button><a href='traitement.php?action=down-qtt&id=$qtt&name=$nom'> - </a></button></td>",
+                        "<td class='thd'><button><a href='traitement.php?action=down-qtt&id=$index'> - </a></button></td>", // je recupere l'index du bouton cliquer
+                        "<td class='thd'>". $produit['qtt']."</td>",
+                        "<td class='thd'><button><a href='traitement.php?action=up-qtt&id=$index'> + </a></button></td>", // je recupere l'index du bouton cliquer
                         "<td class='thd'>".number_format($produit['total'], 2, ",", "&nbsp;")."&nbsp;€</td>",
-                        "<td class='thd'><button><a href='traitement.php?action=up-qtt&id=$qtt&name=$nom'&class=''> + </a></button></td>",
-                        "<td class='thd'><button><a href='traitement.php?action=delete&id=$index&name=$nom'>vider</a></button></td>", // on recupere l'indentation du tableau et on met une action delete on recupere aussi le nom du produit pour pouvoir l'afficher dans l'acceuil
+                        "<td class='thd'><button><a href=traitement.php?action=delete&id=$index&name=".$produit['nom'].">vider</a></button></td>", // on recupere l'indentation du tableau et on met une action delete on recupere aussi le nom du produit pour pouvoir l'afficher dans l'acceuil
                     "</tr>"; // on concatènes des éléments html
                 $totalGeneral += $produit ['total']; // on ajoute le prix d'un produit au prixGeneral
                 $nbproduit += $produit['qtt']; // on ajoute le nombre de produit mis dans le panier
@@ -76,7 +75,7 @@ session_start(); // information récupérer via le GET ou le POST ou via le cook
                     "<td class='thd'><strong>".number_format($totalGeneral, 2, ",", "&nbsp;"). "&nbsp;€</strong></td>",
                     "</tr>",
                     "<tr>",
-                    "<td class='thd' colspan=8><a href='traitement.php?action=clear'>vider</a></td>",
+                    "<td class='thd' colspan=8><button><a href='traitement.php?action=clear'>vider le panier</a></button></td>",
                     "</tr>",
                 "</tbody>";
         }

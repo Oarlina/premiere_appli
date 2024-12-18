@@ -3,54 +3,58 @@
     padding: 0;
     box-sizing: border-box;
 }
-
-body{
-    height: 100%;
-    background-image: url(legume.avif);
-    background-size: cover;
-    width: 100%;
-    /* background-repeat: no-repeat; */
+body, .text{
     display: flex;
     flex-direction: column; /* pour que les éléments soit en colonne*/
     text-align: center; /* pour que les éléments soit centrer horizontalement */
 }
-nav>a{
+body{
+    height: 100%;
+    background-image: url(steve-johnson-wpw8sHoBtSY-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+}
+body, .tete, .message, button, button>a{
+    font-size: larger;
+    color: white;
+}
+nav>a, a{
     text-decoration: none;
-    
     width: 100%;
     color:black;   
 }
 nav{
-    margin: 0 0 20px 0; /* met des marges nul part sauf 20pixels en bas*/
-    width: 100%;
-    background-color: rgb(200, 250, 172);
+    margin: 0 auto 20px auto; /* met des marges nul part sauf 20pixels en bas*/
+    width: 10%;
+    backdrop-filter: blur(30px);
+    /* background-color: rgb(9, 143, 143); */
 }
-
 .text{
-    /* backdrop-filter: blur(30px);  rend flou le fond de 30pixels */
-    /* border: 1px solid black; */
-    background: radial-gradient(circle,green, rgb(122, 228, 101), white ) ;
-    display: flex;
-    flex-direction: column;
-    text-align:center;
+    /* background: radial-gradient(circle,blue, rgb(108, 108, 248), white ) ; */
+    
+    color: white;
+    backdrop-filter: blur(30px); /* pour rendre flou mon fond*/
     margin: 0 auto;
     padding: 10px;
-
 }
-.messageTrue, .messageFalse{
+button{
+    background-color: unset;
+    border: none;
+}
+.message{
     width: fit-content;
-    margin : 2px auto 0 auto ;
+    margin : 8px auto 0 auto ;
 }
-.messageTrue{
+.True{
     background-color: green;
     color:white;
 }
-.messageFalse{
+ .False{
     background-color: tomato;
 }
+.envoyer{margin: 8px 0 0 0;}
 .table{
-    /* border: 1px solid black;  */
-    
     border-collapse: collapse;
 }
 .thd{
